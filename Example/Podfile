@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'KLGuidePage_Example' do
+  pod 'KLGuidePage', :path => '../'
+
+  target 'KLGuidePage_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
