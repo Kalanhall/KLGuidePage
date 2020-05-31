@@ -1,0 +1,27 @@
+{
+  "name": "KLGuidePage",
+  "version": "1.0.0",
+  "summary": "应用引导视图",
+  "description": "组件简介：\n应用启动时的引导视图；",
+  "homepage": "https://github.com/Kalanhall/KLGuidePage",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Kalanhall@163.com": "iios_developer@sina.com"
+  },
+  "source": {
+    "git": "https://github.com/Kalanhall/KLGuidePage.git",
+    "tag": "1.0.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "KLGuidePage/Classes/**/*",
+  "dependencies": {
+    "Masonry": [
+
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+PODS:
+  - KLGuidePage (1.0.0):
+    - Masonry
+  - lottie-ios (2.5.3)
+  - Masonry (1.1.0)
+
+DEPENDENCIES:
+  - KLGuidePage (from `../`)
+  - lottie-ios (= 2.5.3)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - lottie-ios
+    - Masonry
+
+EXTERNAL SOURCES:
+  KLGuidePage:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  KLGuidePage: 7b2290aef51f763fdaf1ae59295cb2896122aaa4
+  lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+
+PODFILE CHECKSUM: 3eb7bbd7b275ca543553b8be3b061c06d2d6dcf4
+
+COCOAPODS: 1.9.2

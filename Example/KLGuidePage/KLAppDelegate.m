@@ -7,40 +7,67 @@
 //
 
 #import "KLAppDelegate.h"
+#import "KLGuideCustomCell.h"
+@import KLGuidePage;
+@import Lottie;
+@import Masonry;
+
+@interface KLAppDelegate () <KLGuidePageDataSource, KLGuidePageDelegate>
+
+@property (strong, nonatomic) NSArray *datas;
+@property (strong, nonatomic) LOTAnimationView *lottieView;
+
+@end
 
 @implementation KLAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    [self.window makeKeyAndVisible];
+    
+    self.datas = @[[UIImage imageNamed:@"1"], [UIImage imageNamed:@"2"], [UIImage imageNamed:@"3"]];
+    KLGuidePage *page = [KLGuidePage pageWithStyle:KLGuideStyleTranslationFade dataSource:self];
+    page.hideForLastPage = YES;
+    page.alphaMultiple = 1.5;
+    page.duration = 1;
+    page.bottomControl.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    page.bottomControl.contentInset = UIEdgeInsetsMake(0, 0, 0, 30);
+    [page registerClass:KLGuideCustomCell.class forCellWithReuseIdentifier:KLGuideCustomCell.description];
+    
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+- (NSArray *)dataOfItems {
+    return self.datas;
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+- (UICollectionViewCell *)guidePage:(KLGuidePage *)page data:(id)data cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    KLGuideCustomCell *cell = (KLGuideCustomCell *)[page dequeueReusableCellWithReuseIdentifier:KLGuideCustomCell.description forIndexPath:indexPath];
+    cell.imageView.image = data;
+    cell.titleLabel.text = @[@"欢迎使用京东", @"请授权位置信息权限", @"获取最新的促销信息"][indexPath.row];
+    cell.subTitleLabel.text = @[@"正品低价、急速配送\n点缀您的品质生活", @"获取周边库存信息和周边服务、推送专属\n商品与优惠", @"随时了解促销信息，掌握实时物流动态\n请\"允许\"京东获取消息通知权限"][indexPath.row];
+    cell.entryBtn.hidden = indexPath.row != self.datas.count - 1;
+    
+    // 立即体验-p0
+    __weak typeof(page) weakpage = page;
+    cell.entryBlock = ^{
+        [weakpage hideWithStyle:KLGuideHideStyleMoveLeft animated:YES];
+    };
+
+    return cell;
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+/**
+ KLGuideStyleFade
+ 需要单独实现这个装载图片的视图
+ */
+- (UIView *)guidePage:(KLGuidePage *)page data:(id)data viewForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UIImageView *imageView = UIImageView.alloc.init;
+    imageView.image = data;
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    return imageView;
 }
 
 @end

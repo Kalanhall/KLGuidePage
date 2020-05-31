@@ -1,9 +1,12 @@
 use_frameworks!
 
-platform :ios, '8.0'
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '9.0'
 
 target 'KLGuidePage_Example' do
   pod 'KLGuidePage', :path => '../'
+  pod 'lottie-ios',                 '2.5.3'
 
   target 'KLGuidePage_Tests' do
     inherit! :search_paths
