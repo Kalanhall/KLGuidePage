@@ -36,7 +36,7 @@ typedef NS_ENUM(NSUInteger, KLGuideHideStyle) {
 
 
 @required
-/// 用于展示的数据集合，Lottie数据个数@[@[@0,@0.25], @[@0.25,@0.5], @[@0.5,@0.75], @[@0.75,@1]]
+/// 用于展示的数据集合
 - (NSArray *)dataOfItems;
 
 @optional

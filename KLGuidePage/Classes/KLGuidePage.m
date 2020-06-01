@@ -29,6 +29,7 @@
 - (instancetype)initWithFrame:(CGRect)frame withStyle:(KLGuideStyle)style {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = UIColor.whiteColor;
         self.style = style;
         self.alphaMultiple = 1;
         self.bottomlHeight = 20;
@@ -67,13 +68,7 @@
     
     [self.bottomControl mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(self.bottomlHeight);
-        if (@available(iOS 11.0, *)) {
-            CGFloat bottom = UIApplication.sharedApplication.keyWindow.safeAreaInsets.bottom;
-            bottom = self.bottomSpace > bottom ? self.bottomSpace : bottom;
-            make.bottom.mas_equalTo(-bottom);
-        } else {
-            make.bottom.mas_equalTo(-self.bottomSpace);
-        }
+        make.bottom.mas_equalTo(-self.bottomSpace);
         make.left.right.mas_equalTo(0);
     }];
 }
